@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class House : MonoBehaviour
 {
-    [SerializeField] private Signalization _signalization;
+    [SerializeField]private UnityEvent _onSafetyChange = new UnityEvent();
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Cheater cheater) == true)
         {
-            _signalization.ChangeSafeState(false);
+            _onSafetyChange?.Invoke();
         }
     }
 
@@ -16,7 +17,7 @@ public class House : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Cheater cheater) == true)
         {
-            _signalization.ChangeSafeState(true);
+            _onSafetyChange?.Invoke();
         }
     }
 }

@@ -9,16 +9,9 @@ public class Signalization : MonoBehaviour
 
     private bool _isSafe = true;
 
-    public Signalization(AudioSource audio, float maxVolume, float increaseVolumeSpeed)
+    public void ChangeSafeState()
     {
-        _audio = audio;
-        _maxVolume = maxVolume;
-        _increaseVolumeSpeed = increaseVolumeSpeed;
-    }
-
-    public void ChangeSafeState(bool isSafe)
-    {
-        _isSafe = isSafe;
+        _isSafe = !_isSafe;
 
         if (_isSafe == true)
         {
@@ -30,27 +23,30 @@ public class Signalization : MonoBehaviour
         }
     }
 
-    public IEnumerator AlertHouse()
+    private IEnumerator AlertHouse()
     {
         _audio.Play();
 
         while (_isSafe == false && _audio.volume < 1f)
         {
-            _audio.volume = Mathf.MoveTowards(_audio.volume, _maxVolume, _increaseVolumeSpeed * Time.deltaTime);
-
+            UpdateVolume(_maxVolume);
             yield return null;
         }
     }
 
-    public IEnumerator SilenceHouse()
+    private IEnumerator SilenceHouse()
     {
         while (_isSafe == true && _audio.volume > 0.0f)
         {
-            _audio.volume = Mathf.MoveTowards(_audio.volume, 0.0f, _increaseVolumeSpeed * Time.deltaTime);
-
+            UpdateVolume(0.0f);
             yield return null;
         }
 
         _audio.Stop();
+    }
+
+    private void UpdateVolume(float maxVolume)
+    {
+        _audio.volume = Mathf.MoveTowards(_audio.volume, maxVolume, _increaseVolumeSpeed * Time.deltaTime);
     }
 }

@@ -418,6 +418,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _signalization: {fileID: 1539743497}
+  _onSafetyChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1539743497}
+        m_TargetAssemblyTypeName: Signalization, Assembly-CSharp
+        m_MethodName: ChangeSafeState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1032000284 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1307618936321242298, guid: d6cff80b399c69f4784ac06e912afb36, type: 3}
