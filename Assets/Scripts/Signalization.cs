@@ -5,6 +5,7 @@ public class Signalization : MonoBehaviour
 {
     [SerializeField] private AudioSource _audio;
     [SerializeField] private float _maxVolume = 1.0f;
+    [SerializeField] private float _minVolume = 0.0f;
     [SerializeField] private float _increaseVolumeSpeed = 0.1f;
 
     private bool _isSafe = true;
@@ -27,7 +28,7 @@ public class Signalization : MonoBehaviour
     {
         _audio.Play();
 
-        while (_isSafe == false && _audio.volume < 1f)
+        while (_isSafe == false && _audio.volume < _maxVolume)
         {
             UpdateVolume(_maxVolume);
             yield return null;
@@ -36,9 +37,9 @@ public class Signalization : MonoBehaviour
 
     private IEnumerator SilenceHouse()
     {
-        while (_isSafe == true && _audio.volume > 0.0f)
+        while (_isSafe == true && _audio.volume > _minVolume)
         {
-            UpdateVolume(0.0f);
+            UpdateVolume(_minVolume);
             yield return null;
         }
 

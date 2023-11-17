@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class House : MonoBehaviour
 {
-    [SerializeField]private UnityEvent _onSafetyChange = new UnityEvent();
+    [SerializeField] private UnityEvent _onSafetyChange = new UnityEvent();
 
     private void OnTriggerEnter(Collider other)
     {
